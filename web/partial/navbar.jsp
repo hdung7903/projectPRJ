@@ -14,18 +14,18 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="./home.jsp">Home <span class="sr-only">(current)</span></a>
-                    </li>                   
+                    </li>                                     
                     <li class="nav-item">
-                        <a class="nav-link" href="./studentschedule.jsp">Student Schedule</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./lectureschedule.jsp">Lecture Schedule</a>
+                        <a class="nav-link" href="./lectureschedule.jsp">Schedule</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./takeattendance.jsp">Take Attendance</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./viewattendance.jsp">View Attendance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./statistic.jsp">Statistic Report</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" id="confirmLogout" href="home.jsp">Logout</a>
+                        <a class="btn btn-primary" id="confirmLogout" href="">Logout</a>
                     </div>
                 </div>
             </div>

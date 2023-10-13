@@ -28,6 +28,14 @@ public class registerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String fullName = request.getParameter("fullName");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String role = request.getParameter("role");
+        String dob = request.getParameter("dob");
+        String major = request.getParameter("major");
+
        response.sendRedirect("./home.jsp");
     }
 

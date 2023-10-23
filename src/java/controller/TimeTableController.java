@@ -6,6 +6,7 @@ package controller;
 
 import dal.SessionDBContext;
 import dal.TimeSlotDBContext;
+import entity.BaseEntity;
 import entity.Session;
 import entity.TimeSlot;
 import java.io.IOException;

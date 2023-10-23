@@ -9,24 +9,26 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
-        <div clas="container-fluid">
-            <%@include file="./partial/navbar.jsp"  %>
+        <div class="container-fluid">
+            <%@include file="../partial/navbar.jsp"  %>
             <div class="container mt-3">
                 <h1>Class List</h1>
-                <table class="table">
+                <table summary="Select a group" border="0">
+                    <caption>Select a course, then a group ...</caption>
                     <thead>
                         <tr>
-                            <th scope="col">Semester</th>
-                            <th scope="col">Major</th>
-                            <th scope="col">Class</th>
+                            <th scope="col">Term</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Group</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
                         <tr>
-                            <td>Major 4</td>
-                            <td>Software Engineer</td>
-                            <td>SE1753</td>
+                            <td valign="top"><a href="#">Fall2023</a></td>
+                            <td valign="top"><a href="#">Computer Science</a></td>
+                            <td valign="top"><a href="#">Data Structures and Algorithms (CSD201)</a></td>
+                            <td valign="top"><a href="#">PRJ301.E1</a></td>
                         </tr>
                     </tbody>
                 </table>

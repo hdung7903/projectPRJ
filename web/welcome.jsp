@@ -9,13 +9,9 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     </head>
-    <style>
-      
-
-    </style>
     <body>
         <div class="container-fluid">
-            <h1 class="text-center mb-4">            </h1>
+            <h1 class="text-center mb-4"></h1>
             <nav class="navbar navbar-expand-sm bg-dark navbar-light sticky-top">
                 <h1>Welcome to my page!</h1>
                 <ul class="navbar-nav ml-auto">
@@ -36,7 +32,6 @@
                         <div class="carousel-item">
                             <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/310744903_6250747208288161_8821814777399000400_n.jpg?stp=cp6_dst-jpg&_nc_cat=102&ccb=1-7&_nc_sid=52f669&_nc_ohc=XOxBCLI67ZYAX8ZalQI&_nc_ht=scontent.fhan2-3.fna&oh=00_AfDf_RlaH6KjLgJLu0mr-zkURLNCyHk-2xb5HzPCX6CSxw&oe=6524431B" class="d-block w-100" alt="Second Slide">
                         </div>
-                        <!-- Add more carousel items as needed -->
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -50,10 +45,8 @@
             </div> 
             <%@include file="./partial/footer.jsp"  %>
         </div>
-        <!-- Register Modal -->
         <%@include file="./modal/register.jsp"  %>
 
-        <!-- Login Modal -->
         <%@include file="./modal/login.jsp"  %>
 
     </body>

@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <%@include file="./partial/navbar.jsp"  %>
+            <%@include file="../partial/navbar.jsp"  %>
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-3">

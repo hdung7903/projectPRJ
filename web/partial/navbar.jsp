@@ -13,24 +13,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="./home.jsp">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<%= request.getContextPath() %>/home.jsp">Home <span class="sr-only">(current)</span></a>
                     </li>                                     
                     <li class="nav-item">
-                        <a class="nav-link" href="./lectureschedule.jsp">Schedule</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/schedule.jsp">Schedule</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./takeattendance.jsp">Take Attendance</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/takeattendance.jsp">Take Attendance</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./viewattendance.jsp">View Attendance</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/viewattendance.jsp">View Attendance</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./statistic.jsp">Statistic Report</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/statistic.jsp">Statistic Report</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="./userinfo.jsp">Admin</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/userinfo.jsp">${requestScope.mess}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">Log Out</a>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" id="confirmLogout" href="">Logout</a>
+                        <a class="btn btn-primary" id="confirmLogout" href="<%= request.getContextPath() %>/">Logout</a>
                     </div>
                 </div>
             </div>

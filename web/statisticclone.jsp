@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,24 +14,25 @@
             <%@include file="./partial/navbar.jsp"  %>
             <div class="container mt-3">
                 <h1>Class List</h1>
-                <table summary="Select a group" border="0">
-                    <caption>Select a course, then a group ...</caption>
+                <table border="1">
                     <thead>
                         <tr>
-                            <th scope="col">Term</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Course</th>
-                            <th scope="col">Group</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                                <% for(int i=1; i<=20; i++) { %>
+                            <th>Slot <%= i %></th>  
+                                <% } %>
+                            <th>Absent %</th> 
+                            <th>Report</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td valign="top"><a href="#">Fall2023</a></td>
-                            <td valign="top"><a href="#">Computer Science</a></td>
-                            <td valign="top"><a href="#">Data Structures and Algorithms (CSD201)</a></td>
-                            <td valign="top"><a href="#">PRJ301.E1</a></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
                         </tr>
-                        <!-- Add more rows based on your data -->
                     </tbody>
                 </table>
             </div>

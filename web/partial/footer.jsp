@@ -20,6 +20,5 @@
                     </ul>
                 </div>
         </div>
-    </footer>
 </body>
 </html>

@@ -10,7 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
-        <div clas="container-fluid">
+        <div class="container-fluid">
             <%@include file="./partial/navbar.jsp"  %>
             <div class="container" style="margin-top:30px">
                 <div class="row">

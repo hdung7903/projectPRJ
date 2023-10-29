@@ -3,24 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/Session.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/dal/DBContext.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/web/modal/register.jsp</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/util/DateTimeHelper.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/web/partial/navbar.jsp</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/dal/TimeSlotDBContext.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/BaseEntity.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/Room.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/Account.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/web/modal/login.jsp</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/web/lecture/schedule.jsp</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/controller/TimeTableController.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/TimeSlot.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/Student.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/Attendance.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/Instructor.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/src/java/entity/Group.java</file>
-            <file>file:/D:/FPT/Assignment/PRJ301/Assignment/web/lecture/takeattendance.jsp</file>
+            <file>file:/E:/learningServlet/in-class/projectPRJ-main/projectPRJ-main/src/java/controller/StatisticController.java</file>
+            <file>file:/E:/learningServlet/in-class/projectPRJ-main/projectPRJ-main/src/java/view/statistic.java</file>
+            <file>file:/E:/learningServlet/in-class/projectPRJ-main/projectPRJ-main/web/WEB-INF/web.xml</file>
+            <file>file:/E:/learningServlet/in-class/projectPRJ-main/projectPRJ-main/src/java/dal/AttendanceDBContext.java</file>
+            <file>file:/E:/learningServlet/in-class/projectPRJ-main/projectPRJ-main/web/lecture/viewstatistic.jsp</file>
         </group>
     </open-files>
 </project-private>

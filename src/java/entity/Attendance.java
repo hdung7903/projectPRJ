@@ -4,19 +4,53 @@
  */
 package entity;
 
-import entity.BaseEntity;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author leduy
  */
 public class Attendance extends BaseEntity {
+
     private Session session;
     private Student student;
     private boolean status;
+    private Group group;
     private String description;
     private Date datetime;
+    private List<Boolean> statuses;
+
+    public Attendance() {
+    }
+
+    public Attendance(Session session, Student student, boolean status, Group group, String description, Date datetime, List<Boolean> statuses) {
+        this.session = session;
+        this.student = student;
+        this.status = status;
+        this.group = group;
+        this.description = description;
+        this.datetime = datetime;
+        this.statuses = statuses;
+    }
+
+    public List<Boolean> getStatuses() {
+        return statuses;
+    }
+
+    public void setStatuses(List<Boolean> statuses) {
+        this.statuses = statuses;
+    }
+
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+  
 
     public Session getSession() {
         return session;
@@ -57,5 +91,5 @@ public class Attendance extends BaseEntity {
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
-    
+
 }

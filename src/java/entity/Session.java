@@ -20,9 +20,19 @@ public class Session extends BaseEntity{
     private Room room;
     private Instructor instructor;
     private Subject subject;
+    private Attendance attendance;
     private boolean isAtt;
     private ArrayList<Attendance> atts= new ArrayList<>();
 
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
+
+   
     public ArrayList<Attendance> getAtts() {
         return atts;
     }

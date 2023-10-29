@@ -1,8 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>home</servlet-name>
+        <servlet-class>view.home</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>info</servlet-name>
+        <servlet-class>view.info</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SessionListController</servlet-name>
+        <servlet-class>controller.SessionListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SessionDetailController</servlet-name>
+        <servlet-class>controller.SessionDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAttendanceController</servlet-name>
+        <servlet-class>controller.ViewAttendanceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAttendanceController</servlet-name>
+        <servlet-class>controller.EditAttendanceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StatisticController</servlet-name>
+        <servlet-class>controller.StatisticController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>statistic</servlet-name>
+        <servlet-class>view.statistic</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>AttendanceController</servlet-name>
-        <url-pattern>/instructor/att</url-pattern>
+        <servlet-name>home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>info</servlet-name>
+        <url-pattern>/info</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessionListController</servlet-name>
+        <url-pattern>/lecture/sessionlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessionDetailController</servlet-name>
+        <url-pattern>/lecture/sessiondetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAttendanceController</servlet-name>
+        <url-pattern>/lecture/viewatt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAttendanceController</servlet-name>
+        <url-pattern>/lecture/editatt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatisticController</servlet-name>
+        <url-pattern>/lecture/statistic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>statistic</servlet-name>
+        <url-pattern>/statistic</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -16,16 +76,16 @@
         <servlet-name>TimeTableController</servlet-name>
         <servlet-class>controller.TimeTableController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AttendanceController</servlet-name>
-        <servlet-class>controller.AttendanceController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>TimeTableController</servlet-name>
         <url-pattern>/lecture/schedule</url-pattern>
     </servlet-mapping>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error404.jsp</location>
-    </error-page>
+    <servlet>
+        <servlet-name>TakeAttendanceController</servlet-name>
+        <servlet-class>controller.TakeAttendanceController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TakeAttendanceController</servlet-name>
+        <url-pattern>/lecture/takeatt</url-pattern>
+    </servlet-mapping>
 </web-app>

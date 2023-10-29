@@ -13,24 +13,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                            <a class="nav-link" href="<%= request.getContextPath() %>/home.jsp">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/home">Home <span class="sr-only">(current)</span></a>
                     </li>                                     
                     <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/schedule.jsp">Schedule</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/lecture/schedule">Schedule</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/takeattendance.jsp">Take Attendance</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/lecture/takeatt">Take Attendance</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/viewattendance.jsp">View Attendance</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/lecture/viewatt">View Attendance</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/lecture/statistic.jsp">Statistic Report</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/lecture/statistic">Statistic Report</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<%= request.getContextPath() %>/userinfo.jsp">${requestScope.mess}</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/info">${requestScope.mess}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">Log Out</a>

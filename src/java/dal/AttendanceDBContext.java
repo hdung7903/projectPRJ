@@ -5,7 +5,6 @@
 package dal;
 
 import entity.Attendance;
-import entity.AttendanceRecord;
 import entity.Group;
 import entity.Session;
 import entity.Student;
@@ -15,7 +14,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AttendanceDBContext extends DBContext<Attendance> {
 
@@ -55,39 +56,39 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         }
         return atts;
     }
-    public List<Attendance> getAttendanceRecords(int groupId) throws SQLException {
-        List<Attendance> attendanceList = new ArrayList<>();
-         String sql = "SELECT g.[gname], s.[stuid], s.[stuname], ses.[sesid], a.status " +
-                         "FROM [Group] g " +
-                         "INNER JOIN [Group_Student] gs ON g.[gid] = gs.[gid] " +
-                         "INNER JOIN [Student] s ON gs.[stuid] = s.[stuid] " +
-                         "INNER JOIN [Session] ses ON g.[gid] = ses.[gid] " +
-                         "LEFT JOIN Attendance a ON ses.sesid = a.sesid AND gs.stuid = a.stuid AND a.att_datetime IS NOT NULL " +
-                         "WHERE g.[gid] = 1 and a.status IS NOT NULL";
-         try{
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            
-            while(rs.next()) {
-                Attendance att = new Attendance();
-                Group g = new Group();
-                Student st = new Student();
-                Session ses= new Session();
-                g.setName(rs.getString("gname"));
-                st.setId(rs.getInt("stuid"));
-                st.setName(rs.getString("stuname"));
-                ses.setId(rs.getInt("sesid"));
-                att.setStatus(rs.getBoolean("status"));
-                att.setGroup(g);
-                att.setStudent(st);
-                att.setSession(ses);
-                attendanceList.add(att);
+
+    
+    public Map<String, List<Boolean>> getAttendanceRecords(int groupId) throws SQLException {
+    Map<String, List<Boolean>> attendanceMap = new HashMap<>();
+    String sql = "SELECT g.[gname], s.[stuid], s.[stuname], ses.[sesid], a.status \n"
+            + "FROM [Group] g \n"
+            + "INNER JOIN [Group_Student] gs ON g.[gid] = gs.[gid] \n"
+            + "INNER JOIN [Student] s ON gs.[stuid] = s.[stuid] \n"
+            + "INNER JOIN [Session] ses ON g.[gid] = ses.[gid] \n"
+            + "LEFT JOIN Attendance a ON ses.sesid = a.sesid AND gs.stuid = a.stuid AND a.att_datetime IS NOT NULL \n"
+            + "WHERE g.[gid] = ? and a.status IS NOT NULL\n"
+            + "ORDER BY s.[stuname];";
+    try {
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setInt(1, groupId);
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            String studentName = rs.getString("stuname");
+            Boolean status = rs.getBoolean("status");
+
+            if (!attendanceMap.containsKey(studentName)) {
+                attendanceMap.put(studentName, new ArrayList<>());
             }
-         } catch (Exception e) {
-            e.printStackTrace();
+
+            attendanceMap.get(studentName).add(status);
         }
-         return attendanceList;
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return attendanceMap;
+}
 
     public int sessionAttended(int groupId) {
         int sessionCount = 0;

@@ -18,6 +18,9 @@ public class Group extends BaseEntity {
     private ArrayList<Student> students = new ArrayList<>();
     private Instructor supervisor;
     private Subject subject;
+    private Session session;
+    private TimeSlot timeslot;
+    private Attendance attendance;
 
     public int getId() {
         return id;
@@ -57,6 +60,30 @@ public class Group extends BaseEntity {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public TimeSlot getTimeslot() {
+        return timeslot;
+    }
+
+    public void setTimeslot(TimeSlot timeslot) {
+        this.timeslot = timeslot;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
     }
 
 }

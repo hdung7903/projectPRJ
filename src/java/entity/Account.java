@@ -4,29 +4,33 @@
  */
 package entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author leduy
  */
 public class Account extends BaseEntity {
-    String username;
-    String password;
-    String displayname;
-    boolean isStudent;
-    boolean isInstructor;
-    boolean isAdmin;
+    private String username;
+    private String password;
+    private String displayname;
+    private Student student;
+    private Instructor instructor;
+    private boolean isStudent;
+    private boolean isInstructor;
 
     public Account() {
     }
 
-    public Account(String username, String password, String displayname, boolean isStudent, boolean isInstructor, boolean isAdmin) {
+    public Account(String username, String password, String displayname, Student student, Instructor instructor, boolean isStudent, boolean isInstructor) {
         this.username = username;
         this.password = password;
         this.displayname = displayname;
+        this.student = student;
+        this.instructor = instructor;
         this.isStudent = isStudent;
         this.isInstructor = isInstructor;
-        this.isAdmin = isAdmin;
-    }
+    }   
 
     public String getUsername() {
         return username;
@@ -52,6 +56,22 @@ public class Account extends BaseEntity {
         this.displayname = displayname;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
     public boolean isIsStudent() {
         return isStudent;
     }
@@ -68,13 +88,5 @@ public class Account extends BaseEntity {
         this.isInstructor = isInstructor;
     }
 
-    public boolean isIsAdmin() {
-        return isAdmin;
-    }
-
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
-    }
-    
     
 }

@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <title>Welcome</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -17,10 +17,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="btn btn-info split" href="#" data-toggle="modal" data-target="#loginModal">Sign In</a>
-                    </li>
-                    <li class="nav-item ml-2">
-                        <button class="btn btn-info split" data-toggle="modal" data-target="#registerModal">Sign Up</button>
-                    </li>
+                    </li>                    
                 </ul>
             </nav> 
             <div class="container">
@@ -43,11 +40,7 @@
                     </a>
                 </div>
             </div> 
-            <%@include file="./partial/footer.jsp"  %>
         </div>
-        <%@include file="./modal/register.jsp"  %>
-
         <%@include file="./modal/login.jsp"  %>
-
     </body>
 </html>

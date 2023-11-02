@@ -20,7 +20,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="home" method="POST" id="loginForm">
+                    <form action="login" method="POST" id="loginForm">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" id="username" name="username" required>
@@ -30,7 +30,6 @@
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        ${requestScope.mess}
                         <button type="submit" class="btn btn-primary" id="loginButton">Login</button>
                         <div class="mt-3">
                             Don't have an account? <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Register here</a>

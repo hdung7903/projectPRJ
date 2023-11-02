@@ -68,19 +68,19 @@ public class SessionDBContext extends DBContext<Session> {
         return sessions;
     }
 
-   public Timestamp getAttendanceDateTime(int sessionId) {
-       Timestamp attDateTime = null;
-    try {
-        String sql = "SELECT s.sesid, s.date, r.roomid, t.tid, t.description, g.gid, g.gname, su.subid, subname, i.iid, i.iname, s.isAtt, a.att_datetime " +
-                     "FROM [Session] s " +
-                     "INNER JOIN [Instructor] i ON i.iid = s.iid " +
-                     "INNER JOIN [Group] g ON g.gid = s.gid " +
-                     "INNER JOIN [TimeSlot] t ON s.tid = t.tid " +
-                     "INNER JOIN [Room] r ON r.roomid = s.rid " +
-                     "INNER JOIN [Subject] su ON g.subid = su.subid " +
-                     "INNER JOIN Attendance a ON s.sesid = a.sesid " +
-                     "WHERE s.sesid = ?";
-            PreparedStatement stm = connection.prepareStatement(sql); 
+    public Timestamp getAttendanceDateTime(int sessionId) {
+        Timestamp attDateTime = null;
+        try {
+            String sql = "SELECT s.sesid, s.date, r.roomid, t.tid, t.description, g.gid, g.gname, su.subid, subname, i.iid, i.iname, s.isAtt, a.att_datetime "
+                    + "FROM [Session] s "
+                    + "INNER JOIN [Instructor] i ON i.iid = s.iid "
+                    + "INNER JOIN [Group] g ON g.gid = s.gid "
+                    + "INNER JOIN [TimeSlot] t ON s.tid = t.tid "
+                    + "INNER JOIN [Room] r ON r.roomid = s.rid "
+                    + "INNER JOIN [Subject] su ON g.subid = su.subid "
+                    + "INNER JOIN Attendance a ON s.sesid = a.sesid "
+                    + "WHERE s.sesid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sessionId);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -95,16 +95,61 @@ public class SessionDBContext extends DBContext<Session> {
     public ArrayList<Session> getSessionByDate(int iid, Date currentday) {
         ArrayList<Session> sessions = new ArrayList<>();
         try {
-            String sql = "SELECT s.sesid,s.date,r.roomid,t.tid,g.gid,g.gname,su.subid,subname,i.iid,i.iname,s.isAtt\n"
+            String sql = "SELECT s.sesid,s.date,r.roomid,t.tid,g.gid,g.gname,su.subid,subname,i.iid,i.iname,s.isAtt,t.description\n"
                     + "FROM [Session] s INNER JOIN [Instructor] i ON i.iid = s.iid\n"
-                    + "				INNER JOIN [Group] g ON g.gid = s.gid\n"
-                    + "			INNER JOIN [TimeSlot] t ON s.tid = t.tid\n"
+                    + "	INNER JOIN [Group] g ON g.gid = s.gid\n"
+                    + "INNER JOIN [TimeSlot] t ON s.tid = t.tid\n"
                     + "INNER JOIN [Room] r ON r.roomid = s.rid\n"
                     + "INNER JOIN [Subject] su ON g.subid = su.subid\n"
                     + "	WHERE i.iid = ? AND s.[date] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, iid);
             stm.setDate(2, currentday);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session session = new Session();
+                session.setId(rs.getInt("sesid"));
+                session.setDate(rs.getDate("date"));
+                session.setIsAtt(rs.getBoolean("isAtt"));
+                Room room = new Room();
+                room.setRid(rs.getString("roomid"));
+                session.setRoom(room);
+                TimeSlot t = new TimeSlot();
+                t.setId(rs.getInt("tid"));
+                t.setDescription(rs.getString("description"));
+                session.setTime(t);
+                Group g = new Group();
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                session.setGroup(g);
+                Subject subject = new Subject();
+                subject.setId(rs.getInt("subid"));
+                subject.setName(rs.getString("subname"));
+                session.setSubject(subject);
+                sessions.add(session);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+    }
+
+    public ArrayList<Session> getStudentSession(int stuid, Date from, Date to) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        try {
+            String sql = "SELECT DISTINCT s.sesid,s.date, a.*,g.gid, g.gname, t.tid, r.roomid, sub.subid,sub.subname,s.isAtt\n"
+                    + "FROM [dbo].[Session] s\n"
+                    + "JOIN [dbo].[Attendance] a ON s.[sesid] = a.[sesid]\n"
+                    + "JOIN [dbo].[Group] g ON s.[gid] = g.[gid]\n"
+                    + "JOIN [dbo].[Group_Student] gs ON gs.[gid] = g.[gid]\n"
+                    + "JOIN [dbo].[TimeSlot] t ON s.[tid] = t.[tid]\n"
+                    + "JOIN [dbo].[Room] r ON s.[rid] = r.[roomid]\n"
+                    + "JOIN [dbo].[Subject] sub ON g.[subid] = sub.[subid]\n"
+                    + "AND a.[stuid] = ? AND s.[date] >= ? AND s.[date] <= ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, stuid);
+            stm.setDate(2, from);
+            stm.setDate(3, to);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Session session = new Session();

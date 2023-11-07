@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <%@include file="./partial/navbar.jsp"  %>
+        <%@include file="./partial/deniednav.jsp"  %>
         <div class="container" style="margin-top:30px">
             <div class="container error-container">
                 <div class="alert alert-danger error-heading" role="alert">

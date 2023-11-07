@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>ViewAttendanceController</servlet-name>
-        <servlet-class>controller.ViewAttendanceController</servlet-class>
+        <servlet-class>controller.lecture.ViewAttendanceController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditAttendanceController</servlet-name>
@@ -29,32 +29,12 @@
         <servlet-class>controller.LogOutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StudentTimeTableController</servlet-name>
-        <servlet-class>controller.student.StudentTimeTableController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentSessionViewController</servlet-name>
-        <servlet-class>controller.student.StudentSessionViewController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentViewAttController</servlet-name>
-        <servlet-class>controller.student.StudentViewAttController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentClassListController</servlet-name>
-        <servlet-class>controller.student.StudentClassListController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Denied</servlet-name>
         <servlet-class>controller.Denied</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LectureHome</servlet-name>
-        <servlet-class>controller.lecture.LectureHome</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentHome</servlet-name>
-        <servlet-class>controller.student.StudentHome</servlet-class>
+        <servlet-name>GroupListController</servlet-name>
+        <servlet-class>controller.lecture.GroupListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SessionListController</servlet-name>
@@ -85,32 +65,12 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StudentTimeTableController</servlet-name>
-        <url-pattern>/student/schedule</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StudentSessionViewController</servlet-name>
-        <url-pattern>/student/sessiondetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StudentViewAttController</servlet-name>
-        <url-pattern>/student/viewAtt</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StudentClassListController</servlet-name>
-        <url-pattern>/student/classlist</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Denied</servlet-name>
         <url-pattern>/denied</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LectureHome</servlet-name>
-        <url-pattern>/lecture</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StudentHome</servlet-name>
-        <url-pattern>/student</url-pattern>
+        <servlet-name>GroupListController</servlet-name>
+        <url-pattern>/lecture/grouplist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

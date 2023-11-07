@@ -10,20 +10,53 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            body {
+                background: #f1f1f1;
+            }
+
+            .container {
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                padding: 30px;
+            }
+
+            h1 {
+                color: #007bff;
+            }
+
+            .btn-primary {
+                background: #007bff;
+                border: none;
+            }
+
+            .btn-primary:hover {
+                background: #0062cc;
+            }
+
+            .table {
+                background: #fff;
+                box-shadow: 0 0 5px rgba(0,0,0,0.05);
+            }
+
+        </style>
     </head>
     <body>
         <div class="container-fluid">
             <%@include file="../partial/navbar.jsp"  %>
-            <div class="container mt-3">
+            <div class="container my-5">
                 <h1 class="text-center mb-4">Timetable</h1>
-                <form action="${pageContext.request.contextPath}/lecture/schedule" method="GET" class="form-inline justify-content-center mb-3">
-                    <label for="from" class="mr-2">From</label>
-                    <input type="date" id="from" name="from" value="${requestScope.from}" class="form-control mr-3"/>
-                    <label for="to" class="mr-2">To</label>
-                    <input type="date" id="to" name="to" value="${requestScope.to}" class="form-control mr-3"/>
-                    <input type="hidden" value="${sessionScope.id}" name="id" readonly />
-                    <button type="submit" class="btn btn-primary">View</button>
-                </form>
+                <div class="form-floating">
+                    <form action="${pageContext.request.contextPath}/lecture/schedule" method="GET" class="form-inline justify-content-center mb-3">
+                        <label for="from" class="mr-2">From</label>
+                        <input type="date" id="from" name="from" value="${requestScope.from}" class="form-control mr-3"/>
+                        <label for="to" class="mr-2">To</label>
+                        <input type="date" id="to" name="to" value="${requestScope.to}" class="form-control mr-3"/>
+                        <input type="hidden" value="${sessionScope.id}" name="id" readonly />
+                        <button type="submit" class="btn btn-primary">View</button>
+                    </form>
+                </div>
                 <c:choose>
                     <c:when test="${dates.size() > 0}">
                         <c:set var="tableIndex" value="1" />
@@ -138,6 +171,5 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-        </div>
     </body>
 </html>

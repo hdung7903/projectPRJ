@@ -4,6 +4,7 @@
  */
 package controller.lecture;
 
+import controller.Authentication;
 import dal.AttendanceDBContext;
 import dal.SessionDBContext;
 import entity.Account;
@@ -15,13 +16,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
  *
  * @author leduy
  */
-public class TakeAttendanceController extends LectureAuthorization {
+public class TakeAttendanceController extends Authentication {
 
 
     /**
@@ -70,8 +72,10 @@ public class TakeAttendanceController extends LectureAuthorization {
         }
         ses.setAtts(atts);
         SessionDBContext sesDB = new SessionDBContext();
-        sesDB.addAttendances(ses); 
-        //        response.sendRedirect("/Assignment/home");
+        sesDB.addAttendance(ses); 
+         HttpSession session = request.getSession();
+        int userid=(int) session.getAttribute("id");
+        response.sendRedirect(request.getContextPath()+"/lecture/schedule?id="+userid);
     }
 
 }

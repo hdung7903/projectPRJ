@@ -4,13 +4,13 @@
  */
 package controller.lecture;
 
+import controller.Authentication;
 import dal.AttendanceDBContext;
 import dal.SessionDBContext;
 import entity.Account;
 import entity.Session;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
@@ -20,7 +20,7 @@ import java.sql.Timestamp;
  *
  * @author leduy
  */
-public class SessionDetailController extends LectureAuthorization {
+public class SessionDetailController extends Authentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

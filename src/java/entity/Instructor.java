@@ -6,6 +6,7 @@ package entity;
 
 import entity.BaseEntity;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -14,6 +15,9 @@ import java.util.ArrayList;
 public class Instructor extends BaseEntity{
     private int id;
     private String name;
+    private String email;
+    private Date dob;
+    private boolean gender;
     private ArrayList<Session> sessions = new ArrayList<>();
     private ArrayList<Group> groups = new ArrayList<>();
 
@@ -47,6 +51,30 @@ public class Instructor extends BaseEntity{
 
     public void setGroups(ArrayList<Group> groups) {
         this.groups = groups;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
     
 }

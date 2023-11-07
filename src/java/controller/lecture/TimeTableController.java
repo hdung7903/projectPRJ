@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.lecture;
 
-import dal.AccountDBContext;
+import controller.Authentication;
 import dal.SessionDBContext;
 import dal.TimeSlotDBContext;
 import entity.Account;
@@ -14,6 +10,7 @@ import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.text.ParseException;
@@ -22,21 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DateTimeHelper;
 
-/**
- *
- * @author leduy
- */
-public class TimeTableController extends LectureAuthorization {
+public class TimeTableController extends Authentication {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int instructorid = Integer.parseInt(request.getParameter("id"));
@@ -80,19 +64,20 @@ public class TimeTableController extends LectureAuthorization {
         }
     
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account account) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int userid=(int) session.getAttribute("id");
+        int id=Integer.parseInt(request.getParameter("id"));
+        if(id==userid)
          processRequest(request, response);
+        else
+         response.sendRedirect(request.getContextPath()+"/denied");
     }
 
     @Override

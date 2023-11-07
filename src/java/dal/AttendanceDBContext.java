@@ -57,47 +57,72 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         return atts;
     }
 
-    
     public Map<String, List<Boolean>> getAttendanceRecords(int groupId) throws SQLException {
-    Map<String, List<Boolean>> attendanceMap = new HashMap<>();
-    String sql = "SELECT g.[gname], s.[stuid], s.[stuname], ses.[sesid], a.status \n"
-            + "FROM [Group] g \n"
-            + "INNER JOIN [Group_Student] gs ON g.[gid] = gs.[gid] \n"
-            + "INNER JOIN [Student] s ON gs.[stuid] = s.[stuid] \n"
-            + "INNER JOIN [Session] ses ON g.[gid] = ses.[gid] \n"
-            + "LEFT JOIN Attendance a ON ses.sesid = a.sesid AND gs.stuid = a.stuid AND a.att_datetime IS NOT NULL \n"
-            + "WHERE g.[gid] = ? and a.status IS NOT NULL\n"
-            + "ORDER BY s.[stuname];";
-    try {
-        PreparedStatement stm = connection.prepareStatement(sql);
-        stm.setInt(1, groupId);
-        ResultSet rs = stm.executeQuery();
+        Map<String, List<Boolean>> attendanceMap = new HashMap<>();
 
-        while (rs.next()) {
-            String studentName = rs.getString("stuname");
-            Boolean status = rs.getBoolean("status");
+        String sql = "SELECT s.[stuname], a.status,acc.email FROM [Group] g \n"
+                + "                INNER JOIN [Group_Student] gs ON g.[gid] = gs.[gid] \n"
+                + "                INNER JOIN [Student] s ON gs.[stuid] = s.[stuid] \n"
+                + "                INNER JOIN [Session] ses ON g.[gid] = ses.[gid] \n"
+                + "				INNER JOIN [Account] acc on acc.fullname=s.stuname\n"
+                + "                LEFT JOIN Attendance a ON ses.sesid = a.sesid AND gs.stuid = a.stuid \n"
+                + "                WHERE g.[gid] = ? AND (ses.isAtt = 1 AND ses.isAtt IS NOT NULL) \n"
+                + "                ORDER BY s.[stuid];";
 
-            if (!attendanceMap.containsKey(studentName)) {
-                attendanceMap.put(studentName, new ArrayList<>());
+        try ( PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, groupId);
+            try ( ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    String studentName = rs.getString("stuname");
+                    Boolean status = rs.getBoolean("status");
+
+                    attendanceMap.computeIfAbsent(studentName, k -> new ArrayList<>()).add(status);
+                }
             }
-
-            attendanceMap.get(studentName).add(status);
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return attendanceMap;
 
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-    return attendanceMap;
-}
+
+    public Map<String, Student> test(int groupId) throws SQLException {
+        Map<String, Student> attendanceMap = new HashMap<>();
+
+        String sql = "SELECT s.[stuname], a.status,acc.email FROM [Group] g \n"
+                + "                INNER JOIN [Group_Student] gs ON g.[gid] = gs.[gid] \n"
+                + "                INNER JOIN [Student] s ON gs.[stuid] = s.[stuid] \n"
+                + "                INNER JOIN [Session] ses ON g.[gid] = ses.[gid] \n"
+                + "				INNER JOIN [Account] acc on acc.fullname=s.stuname\n"
+                + "                LEFT JOIN Attendance a ON ses.sesid = a.sesid AND gs.stuid = a.stuid \n"
+                + "                WHERE g.[gid] = ? AND (ses.isAtt = 1 AND ses.isAtt IS NOT NULL) \n"
+                + "                ORDER BY s.[stuid];";
+
+        try ( PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setInt(1, groupId);
+            try ( ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    String studentName = rs.getString("stuname");
+                    String email = rs.getString("email");
+                    Boolean status = rs.getBoolean("status");
+
+                    Student student = attendanceMap.computeIfAbsent(studentName, k -> new Student(studentName, email, new ArrayList<>()));
+                    student.getAttendances().add(status);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return attendanceMap;
+    }
 
     public int sessionAttended(int groupId) {
         int sessionCount = 0;
 
-        String sql = "SELECT COUNT(DISTINCT s.sesid) AS SessionCount "
-                + "FROM Session s "
-                + "INNER JOIN Attendance a ON s.sesid = a.sesid "
-                + "INNER JOIN [Group] g ON g.[gid] = s.[gid] "
-                + "WHERE a.att_datetime IS NOT NULL AND g.gid = ?";
+        String sql = "SELECT COUNT(DISTINCT s.[index]) AS SessionCount\n"
+                + "FROM Session s\n"
+                + "JOIN Attendance a ON a.sesid = s.sesid\n"
+                + "WHERE s.gid = ? AND a.att_datetime IS NOT NULL";
 
         try ( PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, groupId);

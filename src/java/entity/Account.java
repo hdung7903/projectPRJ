@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -14,6 +14,10 @@ public class Account extends BaseEntity {
     private String username;
     private String password;
     private String displayname;
+    private String fullname;
+    private String email;
+    private Date dob;
+    private boolean gender;
     private Student student;
     private Instructor instructor;
     private boolean isStudent;
@@ -22,15 +26,20 @@ public class Account extends BaseEntity {
     public Account() {
     }
 
-    public Account(String username, String password, String displayname, Student student, Instructor instructor, boolean isStudent, boolean isInstructor) {
+    public Account(String username, String password, String displayname, String fullname, String email, Date dob, boolean gender, Student student, Instructor instructor, boolean isStudent, boolean isInstructor) {
         this.username = username;
         this.password = password;
         this.displayname = displayname;
+        this.fullname = fullname;
+        this.email = email;
+        this.dob = dob;
+        this.gender = gender;
         this.student = student;
         this.instructor = instructor;
         this.isStudent = isStudent;
         this.isInstructor = isInstructor;
-    }   
+    }
+      
 
     public String getUsername() {
         return username;
@@ -86,6 +95,38 @@ public class Account extends BaseEntity {
 
     public void setIsInstructor(boolean isInstructor) {
         this.isInstructor = isInstructor;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 
     

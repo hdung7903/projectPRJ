@@ -10,6 +10,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -31,6 +32,29 @@ public class LogOutController extends HttpServlet {
         request.getSession().setAttribute("account", null);
         request.getSession().setAttribute("displayname", null);
         request.getSession().setAttribute("id", null);
+        Cookie c_user = new Cookie("user", null);
+        Cookie c_pass = new Cookie("pass", null);
+        c_user.setMaxAge(-1);
+        c_pass.setMaxAge(-1);
+        response.addCookie(c_pass);
+        response.addCookie(c_user);
+        HttpSession session = request.getSession();
+        session.invalidate();
+
+        //        request.getSession().removeAttribute("account");
+        //        request.getSession().removeAttribute("displayname");
+        //        request.getSession().removeAttribute("id");
+        //
+        //        // Remove cookies
+        //        Cookie userCookie = new Cookie("user", "");
+        //        userCookie.setMaxAge(0);
+        //        response.addCookie(userCookie);
+        //
+        //        Cookie passCookie = new Cookie("pass", "");
+        //        passCookie.setMaxAge(0);
+        //        response.addCookie(passCookie);
+        response.sendRedirect(request.getContextPath() + "/");
+
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

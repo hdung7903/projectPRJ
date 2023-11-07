@@ -41,7 +41,7 @@ public class AccountDBContext extends DBContext<Account> {
     @Override
     public Account get(Account entity) {
         try {
-            String sql = "SELECT username,displayname FROM Account\n"
+            String sql = "SELECT username,displayname,fullname,email,dob,gender FROM Account\n"
                     + "WHERE username = ? AND [password] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, entity.getUsername());
@@ -73,7 +73,7 @@ public class AccountDBContext extends DBContext<Account> {
                 account.setIsStudent(rs.getBoolean("isStudent"));
                 account.setIsInstructor(rs.getBoolean("isInstructor"));
             } else {
-                account = null; // Set account to null if no data is found for the username
+                account = null; 
             }
 
         } catch (SQLException ex) {
@@ -83,20 +83,21 @@ public class AccountDBContext extends DBContext<Account> {
     }
 
     public int getId(String username) {
-        int id = -1;
+        int id=-1;
         try {
-            String sql = "";
+            String sql = "select iid,username from Instructor\n"
+                    + "where username=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
-            stm.setString(2, username);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                id = rs.getInt("id");
+                id = rs.getInt("iid");
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return id;
+       return id; 
     }
+    
 }

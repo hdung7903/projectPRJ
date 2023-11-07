@@ -5,6 +5,7 @@
 
 package controller.lecture;
 
+import controller.Authentication;
 import dal.AttendanceDBContext;
 import dal.SessionDBContext;
 import entity.Account;
@@ -12,20 +13,18 @@ import entity.Attendance;
 import entity.Session;
 import entity.Student;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
  *
  * @author leduy
  */
-public class EditAttendanceController extends LectureAuthorization {
+public class EditAttendanceController extends Authentication {
     
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account account) throws ServletException, IOException {
          SessionDBContext sesDB = new SessionDBContext();
@@ -62,8 +61,8 @@ public class EditAttendanceController extends LectureAuthorization {
         }
         ses.setAtts(atts);
         SessionDBContext sesDB = new SessionDBContext();
-        sesDB.addAttendances(ses);  
-        
-        response.sendRedirect("../lecture/schedule?id=1");
+        sesDB.addAttendance(ses);
+        request.setAttribute("message", "Attendance updated!");
+        response.sendRedirect(request.getContextPath()+"/home");
     }
 }

@@ -1,5 +1,6 @@
 package controller.lecture;
 
+import controller.Authentication;
 import dal.SessionDBContext;
 import entity.Account;
 import entity.Session;
@@ -8,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DateTimeHelper;
 
-public class SessionListController extends LectureAuthorization {
+public class SessionListController extends Authentication {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,18 +39,7 @@ public class SessionListController extends LectureAuthorization {
             SessionDBContext sessionDB = new SessionDBContext();
             List<Session> sessions = sessionDB.getSessionByDate(instructorid, sqlDate);
 
-            for (Session session : sessions) {
-                System.out.println("Session ID: " + session.getId());
-                System.out.println("Date: " + session.getDate());
-                System.out.println("Is Attending: " + session.isIsAtt());
-                System.out.println("Room ID: " + session.getRoom().getRid());
-                System.out.println("Time Slot Description: " + session.getTime().getDescription());
-                System.out.println("Group ID: " + session.getGroup().getId());
-                System.out.println("Group Name: " + session.getGroup().getName());
-                System.out.println("Subject ID: " + session.getSubject().getId());
-                System.out.println("Subject Name: " + session.getSubject().getName());
-                System.out.println("-------------------------------------------");
-            }
+//            request.setAttribute(dateStr, this);
 
             if (sessions.size() <= 0) {
                 String mess = "No sessions found";
@@ -70,7 +61,14 @@ public class SessionListController extends LectureAuthorization {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account account) throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        int userid = (int) session.getAttribute("id");
+        int id = Integer.parseInt(request.getParameter("id"));
+        if (id == userid) {
+            processRequest(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/denied");
+        }
     }
 
     @Override

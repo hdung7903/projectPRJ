@@ -8,80 +8,56 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+            .navbar {
+                box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            }
+            .nav-link {
+                color: #f8f9fa !important;
+            }
+            .nav-link:hover {
+                color: #adb5bd !important;
+            }
+        </style>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="collapse navbar-collapse" id="navbarNav">
-                <c:choose>
-                    <c:when test="${sessionScope.role =='Instructor'}">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/lecture">Home <span class="sr-only">(current)</span></a>
-                            </li>                                     
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/lecture/schedule?id=${sessionScope.id}">Schedule</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/lecture/takeatt">Take Attendance</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/lecture/viewatt">View Attendance</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/lecture/statistic">Statistic Report</a>
-                            </li>
-                        </ul>                     
-                    </c:when>
-                    <c:when test="${sessionScope.role=='Student'}">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/student${sessionScope.id}">Home <span class="sr-only">(current)</span></a>
-                            </li>                                     
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/student/schedule">Schedule</a>
-                            </li>
-                        </ul> 
-                    </c:when>
-                </c:choose>
+                <ul class="navbar-nav">                    
+                    <li class="nav-link px-2 text-secondary">                                
+                        <a class="nav-link" href="${pageContext.request.contextPath}/home">Home <span class="sr-only">(current)</span></a>
+                    </li>                                     
+                    <li class="nav-link px-2 text-secondary">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/lecture/schedule?id=${sessionScope.id}">Schedule</a>
+                    </li>
+                    <li class="nav-link px-2 text-secondary">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/lecture/sessionlist?id=${sessionScope.id}">Attendance</a>
+                    </li>
+                    <li class="nav-link px-2 text-secondary">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/lecture/grouplist?id=${sessionScope.id}">Statistic Report</a>
+                    </li>
+                </ul>                                         
                 <ul class="navbar-nav ml-auto">
                     <c:if test="${sessionScope.displayname!=null}">
-                        <li class="nav-item">
-                            <a class="nav-link">${sessionScope.displayname}</a>
+                        <li class="nav-link px-2 text-secondary">
+                            <a class="nav-link">Hi,${sessionScope.displayname}</a>
                         </li> 
                     </c:if>
                     <c:if test="${sessionScope.displayname==null}">
-                        <li class="nav-item">
+                        <li class="nav-link px-2 text-secondary">
                             <a class="nav-link"></a>
                         </li> 
                     </c:if>
-                    <li class="nav-item">
+                    <li class="nav-link px-2 text-secondary">
                         <a class="nav-link" data-toggle="modal" data-target="#logoutModal">Log Out</a>
                     </li>
                 </ul>
             </div>
         </nav>
 
-        <!-- Logout Modal HTML -->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to log out?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <form action="logout" method="post">    
-                            <a class="btn btn-primary" id="confirmLogout" href="<%= request.getContextPath() %>/">Logout</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
+    <%@include file="../modal/logout.jsp" %>
 </html>

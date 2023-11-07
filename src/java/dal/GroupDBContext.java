@@ -4,8 +4,10 @@
  */
 package dal;
 
+import entity.Account;
 import entity.Attendance;
 import entity.Group;
+import entity.Instructor;
 import entity.Session;
 import entity.Subject;
 import entity.TimeSlot;
@@ -14,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,7 +70,7 @@ public class GroupDBContext extends DBContext<Group> {
             stm.setDate(2, currentday);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Group g = new Group();                
+                Group g = new Group();
                 g.setName(rs.getString("gname"));
                 Subject su = new Subject();
                 su.setName(rs.getString("subname"));
@@ -89,4 +92,51 @@ public class GroupDBContext extends DBContext<Group> {
         return groups;
     }
 
+    public ArrayList<Group> getInstructorGroup(int iid) {
+        ArrayList<Group> groups = new ArrayList<>();
+        try {
+            String sql = "SELECT gid, gname, sup_iis FROM [Group] WHERE sup_iis=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, iid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Group g = new Group();
+                g.setName(rs.getString("gname"));
+                g.setId(rs.getInt("gid"));
+                Instructor i = new Instructor();
+                i.setId(rs.getInt("sup_iis"));
+                g.setSupervisor(i);
+                groups.add(g);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return groups;
+    }
+
+    public List<Account> getAccountForGroups(int id) {
+        List<Account> accounts = new ArrayList<>();
+        try {
+            String sql = "SELECT a.email, a.fullname\n"
+                    + "FROM Account a \n"
+                    + "INNER JOIN [Student] s ON a.fullname = s.stuname\n"
+                    + "INNER JOIN [Group_Student] gs ON gs.stuid = s.stuid\n"
+                    + "where gs.gid=1\n"
+                    + "ORDER BY s.stuid;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account();
+                acc.setFullname(rs.getString("fullname"));
+                acc.setEmail(rs.getString("email"));
+                accounts.add(acc);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return accounts;
+    }
 }

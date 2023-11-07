@@ -2,16 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.lecture;
 
+import controller.Authentication;
 import dal.AttendanceDBContext;
 import dal.SessionDBContext;
+import entity.Account;
 import entity.Attendance;
 import entity.Session;
 import entity.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
@@ -21,10 +22,10 @@ import java.util.ArrayList;
  *
  * @author leduy
  */
-public class ViewAttendanceController extends HttpServlet {
+public class ViewAttendanceController extends Authentication {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response,Account account)
             throws ServletException, IOException {
         SessionDBContext sesDB = new SessionDBContext();
         Session s = new Session();
@@ -44,7 +45,7 @@ public class ViewAttendanceController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response,Account account)
             throws ServletException, IOException {
         String[] stuids = request.getParameterValues("stuid");
         Session ses = new Session();
@@ -63,7 +64,7 @@ public class ViewAttendanceController extends HttpServlet {
         }
         ses.setAtts(atts);
         SessionDBContext sesDB = new SessionDBContext();
-        sesDB.addAttendances(ses);
+        sesDB.addAttendance(ses);
     }
 
     /**
@@ -74,6 +75,6 @@ public class ViewAttendanceController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

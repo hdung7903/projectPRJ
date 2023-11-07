@@ -3,20 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.student;
+package controller.lecture;
 
+import controller.Authentication;
+import dal.GroupDBContext;
 import entity.Account;
+import entity.Group;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author leduy
  */
-public class StudentHome extends HttpServlet {
+public class GroupListController extends Authentication {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -27,17 +30,25 @@ public class StudentHome extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("/student/studenthome.jsp").forward(request, response);
+        GroupDBContext groupdb= new GroupDBContext();
+       int id=Integer.parseInt(request.getParameter("id"));
+       ArrayList<Group> groups=groupdb.getInstructorGroup(id);
+       request.setAttribute("groups", groups);
+       request.getRequestDispatcher("../lecture/grouplist.jsp").forward(request, response);
     } 
 
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, Account LoggedUser) throws ServletException, IOException {
         processRequest(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, Account LoggedUser) throws ServletException, IOException {
         processRequest(request, response);
     }
 

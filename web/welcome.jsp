@@ -10,7 +10,6 @@
                 background-image: url('https://cdn.discordapp.com/attachments/947741416992436235/1171432282452668487/thumb.png?ex=655ca854&is=654a3354&hm=ddfa52e3206e4b8b9a31d219bf0c5fdd0b3d505b2a096754bb84ed171b0cda7a&');
                 background-size: cover;
                 background-repeat: no-repeat;
-                background-position: 50% 0%;
             }
             .navbar {
                 box-shadow: 0 2px 4px rgba(0,0,0,.1);

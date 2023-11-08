@@ -57,36 +57,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         return atts;
     }
 
-    public Map<String, List<Boolean>> getAttendanceRecords(int groupId) throws SQLException {
-        Map<String, List<Boolean>> attendanceMap = new HashMap<>();
-
-        String sql = "SELECT s.[stuname], a.status,acc.email FROM [Group] g \n"
-                + "                INNER JOIN [Group_Student] gs ON g.[gid] = gs.[gid] \n"
-                + "                INNER JOIN [Student] s ON gs.[stuid] = s.[stuid] \n"
-                + "                INNER JOIN [Session] ses ON g.[gid] = ses.[gid] \n"
-                + "				INNER JOIN [Account] acc on acc.fullname=s.stuname\n"
-                + "                LEFT JOIN Attendance a ON ses.sesid = a.sesid AND gs.stuid = a.stuid \n"
-                + "                WHERE g.[gid] = ? AND (ses.isAtt = 1 AND ses.isAtt IS NOT NULL) \n"
-                + "                ORDER BY s.[stuid];";
-
-        try ( PreparedStatement stm = connection.prepareStatement(sql)) {
-            stm.setInt(1, groupId);
-            try ( ResultSet rs = stm.executeQuery()) {
-                while (rs.next()) {
-                    String studentName = rs.getString("stuname");
-                    Boolean status = rs.getBoolean("status");
-
-                    attendanceMap.computeIfAbsent(studentName, k -> new ArrayList<>()).add(status);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return attendanceMap;
-
-    }
-
-    public Map<String, Student> test(int groupId) throws SQLException {
+    public Map<String, Student> getAttendanceRecords(int groupId) throws SQLException {
         Map<String, Student> attendanceMap = new HashMap<>();
 
         String sql = "SELECT s.[stuname], a.status,acc.email FROM [Group] g \n"

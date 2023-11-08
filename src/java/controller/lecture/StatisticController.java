@@ -38,17 +38,7 @@ public class StatisticController extends Authentication {
 
         int totalSession = sesdb.getTotalSession(groupId, id);
         int attended = attdb.sessionAttended(groupId);
-        System.out.println("Attended: " + attended);
-        Map<String, List<Boolean>> attendanceMap = attdb.getAttendanceRecords(groupId);
-        List<Account> accounts = gdb.getAccountForGroups(groupId);
-        Map<String, Student> test = attdb.test(groupId);
-        for (Student student : test.values()) {
-            System.out.println("Student Name: " + student.getName());
-            System.out.println("Email: " + student.getEmail());
-            System.out.println("Attendance Status: " + student.getAttendances());
-        }
-        request.setAttribute("test", test);
-        request.setAttribute("accounts", accounts);
+        Map<String, Student> attendanceMap = attdb.getAttendanceRecords(groupId);
         request.setAttribute("attendanceMap", attendanceMap);
         request.setAttribute("totalSession", totalSession);
         request.setAttribute("attended", attended);

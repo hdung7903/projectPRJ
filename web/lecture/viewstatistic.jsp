@@ -64,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="entry" items="${test}">
+                                <c:forEach var="entry" items="${attendanceMap}">
                                     <c:set var="absentSessions" value="0" />
                                     <tr class="text-center">
                                         <td style="font-size: 12px; white-space: nowrap;">${entry.key}</td>

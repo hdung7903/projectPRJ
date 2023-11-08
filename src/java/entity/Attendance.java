@@ -19,27 +19,18 @@ public class Attendance extends BaseEntity {
     private Group group;
     private String description;
     private Date datetime;
-    private List<Boolean> statuses;
 
     public Attendance() {
     }
 
-    public Attendance(Session session, Student student, boolean status, Group group, String description, Date datetime, List<Boolean> statuses) {
+    public Attendance(Session session, Student student, boolean status, Group group, String description, Date datetime) {
         this.session = session;
         this.student = student;
         this.status = status;
         this.group = group;
         this.description = description;
         this.datetime = datetime;
-        this.statuses = statuses;
-    }
-
-    public List<Boolean> getStatuses() {
-        return statuses;
-    }
-
-    public void setStatuses(List<Boolean> statuses) {
-        this.statuses = statuses;
+ 
     }
 
 

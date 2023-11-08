@@ -74,12 +74,12 @@
                                             <td><img class="toggleImage" style="width: 50px; height: 50px;" src="https://cdn.discordapp.com/attachments/947741416992436235/1171005032691404921/profile.png?ex=655b1a6c&is=6548a56c&hm=428202d73c6b3e95f3b966e3840f79186e79afdc98a879ea0492fa4957d08806&" alt=""/></td>                                                                                                        
                                             <td style="font-size: 12px; white-space: nowrap;">
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
+                                                    <input class="form-check-input" type="radio" checked="checked"
                                                            name="status${a.student.id}" value="absent"/>
                                                     <label class="form-check-label">Absent</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" checked="checked"
+                                                    <input class="form-check-input" type="radio" 
                                                            name="status${a.student.id}" value="present"/>
                                                     <label class="form-check-label">Present</label>
                                                 </div>

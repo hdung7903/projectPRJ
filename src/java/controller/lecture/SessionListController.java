@@ -39,7 +39,6 @@ public class SessionListController extends Authentication {
             SessionDBContext sessionDB = new SessionDBContext();
             List<Session> sessions = sessionDB.getSessionByDate(instructorid, sqlDate);
 
-//            request.setAttribute(dateStr, this);
 
             if (sessions.size() <= 0) {
                 String mess = "No sessions found";

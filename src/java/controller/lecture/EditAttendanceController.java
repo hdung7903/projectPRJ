@@ -27,7 +27,7 @@ public class EditAttendanceController extends Authentication {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account account) throws ServletException, IOException {
-         SessionDBContext sesDB = new SessionDBContext();
+        SessionDBContext sesDB = new SessionDBContext();
         Session s = new Session();
         int id = Integer.parseInt(request.getParameter("id"));
         s.setId(id);

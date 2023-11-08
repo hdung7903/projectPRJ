@@ -77,7 +77,7 @@ public class TimeTableController extends Authentication {
         if(id==userid)
          processRequest(request, response);
         else
-         response.sendRedirect(request.getContextPath()+"/denied");
+         response.sendRedirect(request.getContextPath()+"/home");
     }
 
     @Override
